@@ -1,0 +1,36 @@
+<%- include("template/cabecera.ejs", {tituloWeb:'Panel de Administración'}) %>
+
+  <div class="container">
+    <h1>CRUD Mongo</h1>
+    <a class="btn btn-success btn-block my-4" href="/libros/crearlibros">Crear un nuevo libro</a>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Editorial</th>
+                    <th scope="col">Género</th>
+                    <th scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (arrayLibros.length> 0) { %>
+                    <!--Haremos el foreach para recorrer el array-->
+                    <% arrayLibros.forEach(libros => { %>
+                        <tr>
+                            <th scope="row"><%= libros.id %></th>
+                            <td><%= libros.nombre %></td>
+                            <td><%= libros.editorial %></td>
+                            <td><%= libros.genero %></td>
+                            <td>
+                                <a class="btn btn-warning btn-sm" href="/libros/<%= libros.id %>">Editar/Eliminar</a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } %>
+          </tbody>
+        </table>
+    </div>
+
+
+<%- include("template/footer.ejs") %>

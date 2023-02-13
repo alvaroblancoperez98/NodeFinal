@@ -1,0 +1,36 @@
+<%- include("template/cabecera.ejs", {tituloWeb:'Panel de Administración'}) %>
+
+  <div class="container">
+    <h1>CRUD Mongo</h1>
+    <a class="btn btn-success btn-block my-4" href="/peliculas/crearpeliculas">Crear una nueva pelicula</a>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Género</th>
+                    <th scope="col">Duracion</th>
+                    <th scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (arrayPeliculas.length> 0) { %>
+                    <!--Haremos el foreach para recorrer el array-->
+                    <% arrayPeliculas.forEach(peliculas => { %>
+                        <tr>
+                            <th scope="row"><%= peliculas.id %></th>
+                            <td><%= peliculas.nombre %></td>
+                            <td><%= peliculas.genero %></td>
+                            <td><%= peliculas.duracion %></td>
+                            <td>
+                                <a class="btn btn-warning btn-sm" href="/peliculas/<%= peliculas.id %>">Editar/Eliminar</a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } %>
+          </tbody>
+        </table>
+    </div>
+
+
+<%- include("template/footer.ejs") %>

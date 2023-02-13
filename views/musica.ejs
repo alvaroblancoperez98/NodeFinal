@@ -1,0 +1,38 @@
+<%- include("template/cabecera.ejs", {tituloWeb:'Panel de Administración'}) %>
+
+  <div class="container">
+    <h1>CRUD Mongo</h1>
+    <a class="btn btn-success btn-block my-4" href="/musica/crearmusica">Insertar nuevo disco de música</a>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Autor</th>
+                    <th scope="col">Género</th>
+                    <th scope="col">Fecha de salida</th>
+                    <th scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (arrayMusica.length> 0) { %>
+                    <!--Haremos el foreach para recorrer el array-->
+                    <% arrayMusica.forEach(musica => { %>
+                        <tr>
+                            <th scope="row"><%= musica.id %></th>
+                            <td><%= musica.nombre %></td>
+                            <td><%= musica.autor %></td>
+                            <td><%= musica.genero %></td>
+                            <td><%= musica.fechasalida %></td>
+                            <td>
+                                <a class="btn btn-warning btn-sm" href="/musica/<%= musica.id %>">Editar/Eliminar</a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } %>
+          </tbody>
+        </table>
+    </div>
+
+
+<%- include("template/footer.ejs") %>

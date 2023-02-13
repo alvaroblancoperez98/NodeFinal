@@ -1,0 +1,13 @@
+<%- include("template/cabecera", {tituloWeb: 'Nuevo Libro' }) %>
+    <div class="container">
+        <h1>Añadir nueva Película</h1>
+        <form action="/peliculas" class="my-2" method="POST">
+            <input type="text" placeholder="Nombre de la película" class="form-control my-2" name="nombre">
+            <input type="text" placeholder="Género de la película" class="form-control my-2" name="genero">
+            <input type="text" placeholder="Duración de la pelicula" class="form-control my-2" name="duracion">
+            <button type="submit" class="btn btn-dark btn-block">
+                Agregar
+            </button>
+        </form>
+    </div>
+<%- include("template/footer") %>

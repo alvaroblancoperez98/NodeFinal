@@ -1,0 +1,75 @@
+<%- include("template/cabecera", {tituloWeb: 'Detalles del libro' }) %>
+    <div class="container">
+        <h1>Detalles del libro</h1>
+        <% if (error) { %>
+            <%= mensaje %> 
+            <a 
+                href="/libros"
+                class="btn btn-dark btn-block my-2"
+            >
+                Volver
+            </a>
+<% } %>
+<% if (!error) { %>
+    <form id="editar" data-id="<%= libros.id %>">
+        <input type="text" value="<%= libros.nombre %>" class="form-control my-2" name="nombre"
+            id="nombreInput">
+        <input type="text" value="<%= libros.editorial %>" class="form-control my-2" name="editorial"
+            id="tipoInput">
+        <input type="text" value="<%= libros.genero %>" class="form-control my-2"
+            name="genero" id="descripcionInput">
+        <button class="btn btn-warning btn-sm" type="submit">
+            Editar
+        </button>
+    </form>
+    <hr>
+    <button class="btn btn-danger btn-sm" data-id="<%= libros.id %>">
+        Eliminar
+    </button>
+<% } %>
+
+    
+    </div>
+<%- include("template/footer") %>
+<script>
+    const btnEliminar = document.querySelector('.btn-danger')
+    btnEliminar.addEventListener('click', async () => {
+        console.log(btnEliminar.dataset.id)
+        try {
+            // https://developer.mozilla.org/es/docs/Web/API/HTMLElement/dataset
+            const data = await fetch(`/libros/${btnEliminar.dataset.id}`, {
+                method: 'delete'
+            })
+            const res = await data.json()
+            console.log(res)
+            if (res.estado) {
+                window.location.href = '/libros'
+            } else {
+                console.log(res)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    })
+    const formEditar = document.querySelector('#editar');
+            formEditar.addEventListener('submit', async (e) => {
+                e.preventDefault()
+                const nombre = formEditar.elements['nombre'].value
+                const editorial = formEditar.elements['editorial'].value
+                const genero = formEditar.elements['genero'].value
+                const id = formEditar.dataset.id
+                const data = await fetch(`/libros/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nombre, editorial, genero })
+                })
+                const res = await data.json()
+                if (res.estado) {
+                    window.location.href = '/libros'
+                } else {
+                    console.log(res)
+                }
+            })
+</script>
