@@ -10,6 +10,9 @@
                     <th scope="col">Nombre</th>
                     <th scope="col">Género</th>
                     <th scope="col">Duracion</th>
+                    <th scope="col">Director</th>
+                    <th scope="col">FechaReserva</th>
+                    <th scope="col">FechaDevolución</th>
                     <th scope="col">Acción</th>
                 </tr>
             </thead>
@@ -22,6 +25,9 @@
                             <td><%= peliculas.nombre %></td>
                             <td><%= peliculas.genero %></td>
                             <td><%= peliculas.duracion %></td>
+                            <td><%= peliculas.director %></td>
+                            <td><%= peliculas.fechareserva %></td>
+                            <td><%= peliculas.fechadevolucion %></td>
                             <td>
                                 <a class="btn btn-warning btn-sm" href="/peliculas/<%= peliculas.id %>">Editar/Eliminar</a>
                             </td>
