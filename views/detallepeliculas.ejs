@@ -15,9 +15,15 @@
         <input type="text" value="<%= peliculas.nombre %>" class="form-control my-2" name="nombre"
             id="nombreInput">
         <input type="text" value="<%= peliculas.genero %>" class="form-control my-2" name="genero"
-            id="tipoInput">
+            id="generoInput">
         <input type="text" value="<%= peliculas.duracion %>" class="form-control my-2"
-            name="duracion" id="descripcionInput">
+            name="duracion" id="duracionInput">
+            <input type="text" value="<%= peliculas.director %>" class="form-control my-2"
+            name="director" id="directorInput">
+            <input type="Date" value="<%= peliculas.fechareserva %>" class="form-control my-2"
+            name="fechareserva" id="reservaInput">
+            <input type="Date" value="<%= peliculas.fechadevolucion %>" class="form-control my-2"
+            name="fechadevolucion" id="devolucionInput">
         <button class="btn btn-warning btn-sm" type="submit">
             Editar
         </button>
@@ -57,13 +63,16 @@
                 const nombre = formEditar.elements['nombre'].value
                 const genero = formEditar.elements['genero'].value
                 const duracion = formEditar.elements['duracion'].value
+                const director = formEditar.elements['director'].value
+                const fechareserva = formEditar.elements['fechareserva'].value
+                const fechadevolucion = formEditar.elements['fechadevolucion'].value
                 const id = formEditar.dataset.id
                 const data = await fetch(`/peliculas/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ nombre, genero, duracion })
+                    body: JSON.stringify({ nombre, genero, duracion, director, fechareserva, fechadevolucion})
                 })
                 const res = await data.json()
                 if (res.estado) {
