@@ -6,14 +6,6 @@ const peliculasSchema = new Schema({
     genero: String,
     duracion: String,
     director: String,
-    fechareserva: {
-     type: Date,
-     default:Date.now
-    },
-    fechadevolucion: {
-        type:Date,
-        required:true
-    }
 })
 
 //Creamos el modelo

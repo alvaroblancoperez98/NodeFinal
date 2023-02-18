@@ -38,6 +38,8 @@ app.use('/peliculas', require('./router/peliculas'))
 
 app.use('/musica', require('./router/musica'))
 
+app.use('/reservas', require('./router/reservas'))
+
 app.use((req, res) => {
     res.status(404).render("404", { 
         titulo404: "Por aqui no es",

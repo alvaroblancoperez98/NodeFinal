@@ -1,0 +1,36 @@
+<%- include("template/cabecera.ejs", {tituloWeb:'Panel de Administración'}) %>
+
+  <div class="container">
+    <h1>Lista de reservas</h1>
+    <a class="btn btn-success btn-block my-4" href="/reservas/crearreservas">Nueva reserva</a>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Fecha de reserva</th>
+                    <th scope="col">Fecha de devolución</th>
+                    <th scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (arrayReserva.length> 0) { %>
+                    <!--Haremos el foreach para recorrer el array-->
+                    <% arrayReserva.forEach(reservas => { %>
+                        <tr>
+                            <th scope="row"><%= reservas.id %></th>
+                            <td><%= reservas.nombre %></td>
+                            <td><%= reservas.fechareserva %></td>
+                            <td><%= reservas.fechadevolucion %></td>
+                            <td>
+                                <a class="btn btn-warning btn-sm" href="/reservas/<%= reservas.id %>">Editar/Eliminar</a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } %>
+          </tbody>
+        </table>
+    </div>
+
+
+<%- include("template/footer.ejs") %>

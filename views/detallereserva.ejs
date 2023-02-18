@@ -1,31 +1,29 @@
-<%- include("template/cabecera", {tituloWeb: 'Detalles de la película' }) %>
+<%- include("template/cabecera", {tituloWeb: 'Detalles de la reserva' }) %>
     <div class="container">
-        <h1>Detalles de la película</h1>
+        <h1>Detalles reserva</h1>
         <% if (error) { %>
             <%= mensaje %> 
             <a 
-                href="/peliculas"
+                href="/reservas"
                 class="btn btn-dark btn-block my-2"
             >
                 Volver
             </a>
 <% } %>
 <% if (!error) { %>
-    <form id="editar" data-id="<%= peliculas.id %>">
-        <input type="text" value="<%= peliculas.nombre %>" class="form-control my-2" name="nombre"
+    <form id="editar" data-id="<%= reserva.id %>">
+        <input type="text" value="<%= reserva.nombre %>" class="form-control my-2" name="nombre"
             id="nombreInput">
-        <input type="text" value="<%= peliculas.genero %>" class="form-control my-2" name="genero"
-            id="generoInput">
-        <input type="text" value="<%= peliculas.duracion %>" class="form-control my-2"
-            name="duracion" id="duracionInput">
-            <input type="text" value="<%= peliculas.director %>" class="form-control my-2"
-            name="director" id="directorInput">
+        <input type="text" value="<%= reserva.fechareserva %>" class="form-control my-2" name="fechareserva"
+            id="fechareservaInput">
+        <input type="text" value="<%= reserva.fechadevolucion %>" class="form-control my-2"
+            name="fechadevolucion" id="fechadevolucionInput">
         <button class="btn btn-warning btn-sm" type="submit">
             Editar
         </button>
     </form>
     <hr>
-    <button class="btn btn-danger btn-sm" data-id="<%= peliculas.id %>">
+    <button class="btn btn-danger btn-sm" data-id="<%= reserva.id %>">
         Eliminar
     </button>
 <% } %>
@@ -39,13 +37,13 @@
         console.log(btnEliminar.dataset.id)
         try {
             // https://developer.mozilla.org/es/docs/Web/API/HTMLElement/dataset
-            const data = await fetch(`/peliculas/${btnEliminar.dataset.id}`, {
+            const data = await fetch(`/reservas/${btnEliminar.dataset.id}`, {
                 method: 'delete'
             })
             const res = await data.json()
             console.log(res)
             if (res.estado) {
-                window.location.href = '/peliculas'
+                window.location.href = '/reservas'
             } else {
                 console.log(res)
             }
@@ -57,20 +55,19 @@
             formEditar.addEventListener('submit', async (e) => {
                 e.preventDefault()
                 const nombre = formEditar.elements['nombre'].value
-                const genero = formEditar.elements['genero'].value
-                const duracion = formEditar.elements['duracion'].value
-                const director = formEditar.elements['director'].value
+                const fechareserva = formEditar.elements['fechareserva'].value
+                const fechadevolucion = formEditar.elements['fechadevolucion'].value
                 const id = formEditar.dataset.id
-                const data = await fetch(`/peliculas/${id}`, {
+                const data = await fetch(`/reservas/${id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ nombre, genero, duracion, director})
+                    body: JSON.stringify({ nombre, fechareserva, fechadevolucion })
                 })
                 const res = await data.json()
                 if (res.estado) {
-                    window.location.href = '/peliculas'
+                    window.location.href = '/reservas'
                 } else {
                     console.log(res)
                 }
