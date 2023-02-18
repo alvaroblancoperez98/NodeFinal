@@ -15,19 +15,20 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/crearreservas', (req, res) => {
-    res.render('crearreservas'); 
- })
-
+    res.render('crearreservas', {error: false});
+});
  
 router.post('/', async (req, res) => {
     const body = req.body 
     console.log(body) 
     try {
         const reservaDB = new Reserva(body) 
+        await reservaDB.validate();
         await reservaDB.save() 
         res.redirect('/reservas') 
     } catch (error) {
         console.log('error', error)
+        res.render('crearreservas', { error: error.message })
     }
 })
 

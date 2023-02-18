@@ -15,38 +15,37 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/crearmusica', (req, res) => {
-    res.render('crearmusica'); //nueva vista que llamaremos Crear
+    res.render('crearmusica'); 
  })
 
  
 router.post('/', async (req, res) => {
-    const body = req.body //Gracias al body parser, de esta forma
-    //podremos recuperar todo lo que viene del body
-    console.log(body) //Para comprobarlo por pantalla
+    const body = req.body 
+   
+    console.log(body) 
     try {
-        const musicaDB = new Musica(body) //Creamos un nuevo libro, gracias al modelo
-        await musicaDB.save() //Lo guardamos con .save(), gracias a Mongoose
-        res.redirect('/musica') //Volvemos al listado
+        const musicaDB = new Musica(body) 
+        await musicaDB.save() 
+        res.redirect('/musica') 
     } catch (error) {
         console.log('error', error)
     }
 })
 
-router.get('/:id', async(req, res) => { //El id vendrá por el GET (barra de direcciones)
-    const id = req.params.id //Recordemos que en la plantilla "libro.ejs" le pusimos
-    //a este campo libro.id, por eso lo llamados con params.id
+router.get('/:id', async(req, res) => { 
+    const id = req.params.id 
+    
     try {
-        const musicaDB = await Musica.findOne({ _id: id }) //_id porque así lo indica Mongo
-							//Esta variable “Libro” está definida arriba con el “require”
-        //Buscamos con Mongoose un único documento que coincida con el id indicado
-        console.log(musicaDB) //Para probarlo por consola
-        res.render('detallemusica', { //Para mostrar el objeto en la vista "detalle", que tenemos que crear
+        const musicaDB = await Musica.findOne({ _id: id }) 
+							
+        console.log(musicaDB) 
+        res.render('detallemusica', { 
             musica: musicaDB,
             error: false
         })
-    } catch (error) { //Si el id indicado no se encuentra
+    } catch (error) { 
         console.log('Se ha producido un error', error)
-        res.render('detallemusica', { //Mostraremos el error en la vista "detalle"
+        res.render('detallemusica', { 
             error: true,
             mensaje: 'Disco no encontrado!'
         })
@@ -58,8 +57,7 @@ router.delete('/:id', async (req, res) => {
     const id = req.params.id;
     console.log('id desde backend', id)
     try {
-        //En la documentación de Mongoose podremos encontrar la
-        //siguiente función para eliminar
+        
         const musicaDB = await Musica.findByIdAndDelete({ _id: id });
         console.log(musicaDB)
         if (!musicaDB) {
