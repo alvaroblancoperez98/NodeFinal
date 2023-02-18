@@ -35,7 +35,6 @@
             btnEliminar.addEventListener('click', async () => {
                 console.log(btnEliminar.dataset.id)
                 try {
-                    // https://developer.mozilla.org/es/docs/Web/API/HTMLElement/dataset
                     const data = await fetch(`/musica/${btnEliminar.dataset.id}`, {
                         method: 'delete'
                     })
