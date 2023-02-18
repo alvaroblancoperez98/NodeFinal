@@ -9,7 +9,13 @@ const reservasSchema = new Schema({
     },
     fechadevolucion: {
         type: Date,
-        required: true
+        required: true,
+        validate: {
+            validator: function(value) {
+                return value >= this.fechareserva;
+            },
+            message: props => "La fecha de devolución debe ser posterior o igual a la fecha de reserva"
+        }
     }
 })
 
